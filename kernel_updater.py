@@ -11,6 +11,8 @@ else:
 
 dtype = torch.float64 
 
+!wget https://raw.githubusercontent.com/RezoanoorRahman/GP-NN-in-Torch/main/bilinear_interpolation.py
+
 from bilinear_interpolation import linear_interpolation_F_diag, bilinear_interpolation_F
 
 
