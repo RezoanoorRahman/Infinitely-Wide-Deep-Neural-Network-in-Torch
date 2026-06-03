@@ -2,8 +2,22 @@ import torch
 import math
 
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-dtype = torch.float64  #Change format for Cholesky stability
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+elif torch.backends.mps.is_available():
+    device = torch.device("mps")
+else:
+    device = torch.device("cpu")
+
+dtype = torch.float64 
+
+from bilinear_interpolation import linear_interpolation_F_diag, bilinear_interpolation_F
+
+
+###################################################################################
+
+
+
 
 
 # Initial kernel assuming row-wise independence: K0(x,x') = sigma_b^2 + sigma_w^2 * <x,x'> / d_in
