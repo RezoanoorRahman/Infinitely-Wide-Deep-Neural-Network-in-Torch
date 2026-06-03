@@ -1,6 +1,6 @@
 import torch
 import math
-
+import urllib.request
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
@@ -11,15 +11,18 @@ else:
 
 dtype = torch.float64 
 
-!wget https://raw.githubusercontent.com/RezoanoorRahman/GP-NN-in-Torch/main/bilinear_interpolation.py
+
+
+urllib.request.urlretrieve(
+    "https://raw.githubusercontent.com/RezoanoorRahman/GP-NN-in-Torch/main/bilinear_interpolation.py",
+    "bilinear_interpolation.py"
+)
+
 
 from bilinear_interpolation import linear_interpolation_F_diag, bilinear_interpolation_F
 
 
 ###################################################################################
-
-
-
 
 
 # Initial kernel assuming row-wise independence: K0(x,x') = sigma_b^2 + sigma_w^2 * <x,x'> / d_in
