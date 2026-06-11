@@ -12,9 +12,8 @@ else:
 dtype = torch.float64 
 
 
-
 urllib.request.urlretrieve(
-    "https://raw.githubusercontent.com/RezoanoorRahman/GP-NN-in-Torch/main/bilinear_interpolation.py",
+    "https://raw.githubusercontent.com/RezoanoorRahman/Infinitely-Wide-Deep-Neural-Network-in-Torch/main/bilinear_interpolation.py",
     "bilinear_interpolation.py"
 )
 
