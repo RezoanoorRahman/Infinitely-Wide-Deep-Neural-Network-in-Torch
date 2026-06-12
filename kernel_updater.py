@@ -119,7 +119,7 @@ def tanh_nngp_kernel(
         # Rectangular case needed to get the cross pairwise covariance between the training and test inputs (X),
         # since the input numbers are often different.
         else:
-            # --- rectangular case (X1 != X2) ---
+            # Kernel for test X
             S = s1.unsqueeze(1)                    # (n1,1)
             T = s2.unsqueeze(0)                    # (1,n2)
 
@@ -214,7 +214,7 @@ def tanh_nngp_kernel_square_chunked(
 
             del K_block, s_block, C_block, mask, s_mat, c_mat, F_vals, block_updated
 
-        # Apply the final linear transformation
+        # Apply the final affine transformation
         K = sigma_b2 + sigma_w2 * K_updated
 
     return K
@@ -249,7 +249,7 @@ def tanh_nngp_kernel_rect_chunked(
 
         K_updated = torch.zeros_like(K)
 
-        # --- chunk over rows of X1 ---
+        # Chunk-wise update over rows of X1
         for start in range(0, n1, chunk_size):
             end = min(start + chunk_size, n1)
 
@@ -260,24 +260,24 @@ def tanh_nngp_kernel_rect_chunked(
             norm = torch.sqrt(s_block * s2.unsqueeze(0)).clamp_min(1e-12)
             C_block = K_block / norm
 
-            # flatten for interpolation
+            # Flatten for interpolation
             s_mat = s_block.expand_as(K_block).reshape(-1)
             c_mat = C_block.reshape(-1)
 
-            # lookup
+            # use lookup table to update
             F_vals = bilinear_interpolation_F(
                 s_mat, c_mat, s_vec, c_vec, F_grid
             )
 
             K_updated[start:end, :] = F_vals.view(end - start, n2)
 
-            # free memory
+            # free up the memory
             del K_block, s_block, norm, C_block, s_mat, c_mat, F_vals
 
-        # --- scale ---
+        # Affine transformation
         K = sigma_b2 + sigma_w2 * K_updated
 
-        # --- update diagonals (CRITICAL for correctness) ---
+        # Update diagonals
         s1 = sigma_b2 + sigma_w2 * linear_interpolation_F_diag(s1, s_vec, F_diag)
         s2 = sigma_b2 + sigma_w2 * linear_interpolation_F_diag(s2, s_vec, F_diag)
 
