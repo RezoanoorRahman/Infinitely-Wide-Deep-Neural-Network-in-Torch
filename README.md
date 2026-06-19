@@ -27,18 +27,13 @@ $$
 
 - Repeat this process to compute the training-training, training-test, and test-test kernels:
 
-$$
-K_{DD}=K^L(X_{\mathrm{train}}, X_{\mathrm{train}}), \quad
-K_{*D}=K^L(X_*, X_{\mathrm{train}}), \quad
-K_{**}=K^L(X_*, X_*).
-$$
+$$K_{DD}=K^L(X_{\mathrm{train}}, X_{\mathrm{train}})$$
+$$K_{*D}=K^L(X_*, X_{\mathrm{train}})$$
+$$K_{**}=K^L(X_*, X_*).$$
 
 - Use standard Gaussian process regression formulas to compute the predictive mean and covariance for the test set:
 
-$$
-\mu_*
-=
-K_{*D}
+$$\mu* = K_{*D}
 (K_{DD}+\sigma_\epsilon^2 I)^{-1}
 t
 $$
