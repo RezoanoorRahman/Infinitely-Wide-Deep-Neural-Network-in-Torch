@@ -33,14 +33,14 @@ $$K_{**}=K^L(X*, X*).$$
 
 - Use standard Gaussian process regression formulas to compute the predictive mean and covariance for the test set:
 
-$$\mu* = K_{*D}
-(K_{DD}+\sigma_\epsilon^2 I)^{-1}
-t
+$$
+\mu* = K_{*D}
+(K_{DD}+\sigma_\epsilon^2 I)^{-1} t, \text{ and}
 $$
 
 $$
 \Sigma* = K^{**} - K_{*D}
-(K_{DD}+\sigma_\epsilon^2 I)^{-1}
+(K_{DD}+\sigma_{\epsilon}^2 I)^{-1}
 K_{D*}.
 $$
 
