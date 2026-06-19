@@ -39,9 +39,7 @@ t
 $$
 
 $$
-\Sigma_*
-=
-K** - K_{*D}
+\Sigma* =K** - K_{*D}
 (K_{DD}+\sigma_\epsilon^2 I)^{-1}
 K_{D*}.
 $$
