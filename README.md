@@ -33,18 +33,16 @@ $$K_{**}=K^L(X*, X*).$$
 
 - Use standard Gaussian process regression formulas to compute the predictive mean and covariance for the test set:
 
+
+
 $$
-\mu* = K_{*D}
+\bar \mu = K_{*D}
 (K_{DD}+\sigma_\epsilon^2 I)^{-1} t, \text{ and}
 $$
 
+
 $$
-\Sigma_* =
-K_{**}
--
-K_{*D}
-\left(K_{DD}+\sigma_{\epsilon}^2 I\right)^{-1}
-K_{D*}.
+\bar K = K_{**} - K_{*D} (K_{DD} + \sigma^2_{\epsilon} I)^{-1} K_{*D}^T
 $$
 
 ![Infinite-width neural network](images/flow.png)
