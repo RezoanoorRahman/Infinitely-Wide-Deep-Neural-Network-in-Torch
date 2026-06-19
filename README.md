@@ -47,7 +47,7 @@ $$
 
 ![Infinite-width neural network](images/flow.png)
 
-*Figure 1. As the width of each hidden layer approaches infinity, a randomly initialized neural network converges to a Gaussian process.*
+*Figure 1. Flow of iterative update of Kernels for Gaussian Process.*
 
 ## 1.2 Numerical Calculation of the Expectation
 
