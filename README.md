@@ -1,4 +1,4 @@
-**# 1 Overview
+# 1 Overview
 
 We implemented the Neural Network Gaussian Process (NNGP) method proposed by Lee et al. (2018) using *PyTorch*. Additionally, we implemented a chunk-wise kernel update strategy to bypass memory allocation bottlenecks during large-scale kernel computations.
 
@@ -76,8 +76,7 @@ $$
 \mathcal{O}\left(n_v n_c + L(n_{\mathrm{train}}^2+n_{\mathrm{train}}n_{\mathrm{test}})\right).
 $$
 
-The implementation is available in [grid_calculation.py](https://raw.githubusercontent.com/RezoanoorRahman/Infinitely-Wide-Deep-Neural-Network-in-Torch/main/grid_calculation.py), which can be adapted to generate lookup tables for other activation functions.
+The implementation is available in [grid_calculation.py](https://raw.githubusercontent.com/RezoanoorRahman/Infinitely-Wide-Deep-Neural-Network-in-Torch/main/scripts/grid_calculation.py), which can be adapted to generate lookup tables for other activation functions.
 
 For a detailed theoretical treatment, see [Deep_NNGP.pdf](https://github.com/RezoanoorRahman/Infinitely-Wide-Deep-Neural-Network-in-Torch/blob/main/Deep_NNGP.pdf).
 
-**
