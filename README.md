@@ -1,0 +1,11 @@
+# Introduction
+
+We implemented the deep-nearest neighbor Gaussian process (Deep-NNGP) method proposed by Lee et al. (2018) using *PyTorch*. Additionally, we implemented chunk-wise kernel update method for bypassing the memory allocation bottleneck while implementing this algorithm. 
+
+Neural network Gaussian processes (NNGPs) arise from the connection between infinitely wide neural networks and Gaussian processes. Neal (1996) showed that a single-hidden-layer neural network with infinitely many neurons converges to a Gaussian process under suitable assumptions. Extending this result, Lee et al. (2018) demonstrated that deep neural networks also converge to Gaussian processes when the width of each hidden layer tends to infinity. The core **benefit** of this GP-based model over MLP models are that, it automatically provides an uncertainty quantification which is strongly and positively correlated with the test error rate, as shown by the authors. On the other hand, the main **drawback** is that, the algorithm is sensitive to the choice of hyperparameters and hence, an external validation is necessary. 
+
+
+In general, for layer-to-layer update of the covariance matrix of the neural network, a closed form solution is not available and hence, a numeric computation is necessary. The cost of this computation of a $L-$layered network is $\mathcal{O}\left(n_g^2 L (n_{\mathrm{train}}^2+n_{\mathrm{train}}n_{\mathrm{test}})\right)$. Here, $n_{\mathrm{train}}$, $n_{\mathrm{test}}$ and $n_{\mathrm{g}}$ indicates the training, test and computational grid size, respectively. In this regard, Lee et al. (2018) proposed a bilinear-interpolation based lookup mathod which reduces the numeric complexity  to $\mathcal{O}\left(n_g^2 n_v n_c + L(n_{\mathrm{train}}^2+n_{\mathrm{train}}n_{\mathrm{test}})\right)$. Here, $n_v$ and $n_c$ are the grid size for variance and correlations. The reduction in cost is due to the fact that, the table required for bilinear interpolation is required to compute only once. 
+
+In this project, we pre-computed the look-up table for $tanh()$ activation function, which reduces the implementation cost even further to $\mathcal{O}\left(n_v n_c + L(n_{\mathrm{train}}^2+n_{\mathrm{train}}n_{\mathrm{test}})\right)$.
+
