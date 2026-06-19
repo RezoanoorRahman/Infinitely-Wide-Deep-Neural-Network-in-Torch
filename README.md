@@ -1,4 +1,4 @@
-# 1 Overview
+**# 1 Overview
 
 We implemented the Neural Network Gaussian Process (NNGP) method proposed by Lee et al. (2018) using *PyTorch*. Additionally, we implemented a chunk-wise kernel update strategy to bypass memory allocation bottlenecks during large-scale kernel computations.
 
@@ -28,8 +28,8 @@ $$
 - Repeat this process to compute the training-training, training-test, and test-test kernels:
 
 $$K_{DD}=K^L(X_{\mathrm{train}}, X_{\mathrm{train}})$$
-$$K_{*D}=K^L(X_*, X_{\mathrm{train}})$$
-$$K_{**}=K^L(X_*, X_*).$$
+$$K_{*D}=K^L(X*, X_{\mathrm{train}})$$
+$$K_{**}=K^L(X*, X*).$$
 
 - Use standard Gaussian process regression formulas to compute the predictive mean and covariance for the test set:
 
@@ -41,9 +41,7 @@ $$
 $$
 \Sigma_*
 =
-K_{**}
--
-K_{*D}
+K** - K_{*D}
 (K_{DD}+\sigma_\epsilon^2 I)^{-1}
 K_{D*}.
 $$
@@ -82,3 +80,4 @@ The implementation is available in [grid_calculation.py](https://raw.githubuserc
 
 For a detailed theoretical treatment, see [Deep_NNGP.pdf](https://github.com/RezoanoorRahman/Infinitely-Wide-Deep-Neural-Network-in-Torch/blob/main/Deep_NNGP.pdf).
 
+**
