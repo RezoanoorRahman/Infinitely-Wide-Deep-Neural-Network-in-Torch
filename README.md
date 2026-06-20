@@ -82,9 +82,9 @@ For a detailed theoretical treatment, see [Deep_NNGP.pdf](https://github.com/Rez
 
 
 
-# Step by step implementation
+# 2 Step by step implementation
 
-
+## 2.1 Load required libraries and download pre-computed lookup table
 
 First load the required libraries and set up the device. If *CUDA* is available, we can speed-up the implementation process by using it.
 
@@ -134,12 +134,12 @@ urllib.request.urlretrieve(
 from kernel_updater import relu_nngp_kernel, tanh_nngp_kernel_square_chunked, tanh_nngp_kernel_rect_chunked
 
 ```
-A short description of the kernel updater functions are provided at the end of this readme file.
+A short description of the kernel updater functions are provided in [Appendix](#appendix).
 
 
 
 
-### Training 
+## 2.2 Training 
 
 Using these functions, we can write the following function that takes Training data $D_{Train}=(X_{Train}, y_{Train})$ and Test inputs $X_{Test}$ for fixed hyperparameters:  $\sigma^2_w, \sigma^2_b, \sigma^2_e$ and $L (Depth)$ for $ReLu()$ activation and provides predicted mean and variances.
 
@@ -185,7 +185,7 @@ def get_mean_cov_relu(sigma_w2, sigma_b2, noise,
 ```
 
 
-Same for $Tanh()$ kernel. The core difference between this function and the last one is that during the Kernel building process, we used one extra argument $\text{chunk_size}$ which indicates how many components of the kernels will get updated at a single time.
+Same for $Tanh()$ kernel. The core difference between this function and the last one is that during the Kernel building process, we used one extra argument `chunk_size` which indicates how many components of the kernels will get updated at a single time.
 
 
 
@@ -240,7 +240,7 @@ def get_mean_cov_tanh(sigma_w2, sigma_b2, noise,
 ```
 
 
-## Conclusion
+# 3 Conclusion
 
 The performance of this method is heavily dependent on the choice of hyperparameters as this method doesn't implicitly learn/update them. As a result, external validation to choose the values of hyperparameters is necessary. For example, we implemented **10-Fold cross validation** method to choose the best set for implementing a **multi-class classifier on the MNIST dataset**. The full process is available in the notebook [Test_MNIST.ipynb](https://github.com/RezoanoorRahman/Infinitely-Wide-Deep-Neural-Network-in-Torch/blob/main/Test_MNIST.ipynb). Eventually, it yields an accuracy of $96.1\%$ for $Sigmoid()$ activation and number of hidden layers $L=20$. For $Tanh()$ activation, the accuracy drops to $95.6\%$
 
@@ -251,7 +251,7 @@ The performance of this method is heavily dependent on the choice of hyperparame
 
 
 
-## References
+# References
 
 - Lee, J., Bahri, Y., Novak, R., Schoenholz, S. S., Pennington, J., & Sohl-Dickstein, J. (2018). *Deep neural networks as Gaussian processes*. In *International Conference on Learning Representations (ICLR)*. https://arxiv.org/abs/1711.00165
 
@@ -260,7 +260,8 @@ The performance of this method is heavily dependent on the choice of hyperparame
 
 -------
 
-## Appendix: Short description of the kernel updater functions.
+
+# Appendix
 
 **relu_nngp_kernel(X1, X2, depth, sigma_w2, sigma_b2, d_in):**
 
@@ -330,11 +331,5 @@ The performance of this method is heavily dependent on the choice of hyperparame
 
 
 - Return the final kernel of shape `(n1 , n2)`.
-
-
-
-
-
-
 
 
