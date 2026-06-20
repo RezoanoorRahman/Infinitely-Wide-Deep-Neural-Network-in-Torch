@@ -1,3 +1,26 @@
+# 0 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/RezoanoorRahman/Infinitely-Wide-Deep-Neural-Network-in-Torch.git
+cd Infinitely-Wide-Deep-Neural-Network-in-Torch
+```
+
+Create a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate    # Linux/macOS
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+-----------------------
+
 # 1 Overview
 
 We implemented the Neural Network Gaussian Process (NNGP) method proposed by Lee et al. (2018) using *PyTorch*. Additionally, we implemented a chunk-wise kernel update strategy to bypass memory allocation bottlenecks during large-scale kernel computations.
@@ -79,7 +102,7 @@ The implementation is available in [grid_calculation.py](https://raw.githubuserc
 
 For a detailed theoretical treatment, see [Deep_NNGP.pdf](https://github.com/RezoanoorRahman/Infinitely-Wide-Deep-Neural-Network-in-Torch/blob/main/Deep_NNGP.pdf).
 
-
+------------------------------
 
 
 # 2 Step by step implementation
